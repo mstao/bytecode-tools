@@ -1,6 +1,5 @@
 package me.mingshan.bytecode.handler;
 
-import me.mingshan.bytecode.handler.attribute.AttributeProcessingFactory;
 import me.mingshan.bytecode.type.*;
 import me.mingshan.bytecode.util.AttributeUtil;
 
@@ -42,10 +41,6 @@ public class FieldHandler implements BaseHandler {
 
                 if (attributesCount != 0) {
                     AttributeInfo[] attributeInfos = AttributeUtil.parseAttributeInfos(codeBuffer, attributesCount);
-
-                    for (AttributeInfo attributeInfo : attributeInfos) {
-                        AttributeProcessingFactory.processConstantValueAttribute(classFile, attributeInfo);
-                    }
 
                     fieldInfo.setAttributes(attributeInfos);
                 }

@@ -1,6 +1,5 @@
 package me.mingshan.bytecode.handler;
 
-import me.mingshan.bytecode.handler.attribute.AttributeProcessingFactory;
 import me.mingshan.bytecode.type.AttributeInfo;
 import me.mingshan.bytecode.type.ClassFile;
 import me.mingshan.bytecode.type.U2;
@@ -24,6 +23,7 @@ public class AttributeHandler implements BaseHandler {
         System.out.println(">>>>>>> 属性解析开始 >>>>>>>");
 
         U2 attributesCount = new U2(codeBuffer.get(), codeBuffer.get());
+        classFile.setAttributesCount(attributesCount);
         Integer attributesCountInt = attributesCount.toInteger();
 
         System.out.println("属性数量：" + attributesCountInt);
@@ -36,8 +36,6 @@ public class AttributeHandler implements BaseHandler {
                 System.out.println("-----");
                 System.out.println("原始信息：" + attributeInfo);
                 System.out.println("详细信息：" + attributeInfo.detail(classFile));
-
-                AttributeProcessingFactory.processConstantValueAttribute(classFile, attributeInfo);
             }
         }
 

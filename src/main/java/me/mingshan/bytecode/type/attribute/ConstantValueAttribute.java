@@ -9,9 +9,7 @@ import me.mingshan.bytecode.util.ConstantPoolUtil;
  * @author hanjuntao
  * @date 2021/8/14
  */
-public class ConstantValueAttribute {
-    private U2 attributeNameIndex;
-    private U4 attributeLength;
+public class ConstantValueAttribute extends BaseAttribute {
     /**
      * <pre>
      * Field Type	Entry Type
@@ -24,20 +22,13 @@ public class ConstantValueAttribute {
      */
     private U2 constantValueIndex;
 
-    public U2 getAttributeNameIndex() {
-        return attributeNameIndex;
+    public ConstantValueAttribute(U2 attributeNameIndex, U4 attributeLength) {
+        super(attributeNameIndex, attributeLength);
     }
 
-    public void setAttributeNameIndex(U2 attributeNameIndex) {
-        this.attributeNameIndex = attributeNameIndex;
-    }
-
-    public U4 getAttributeLength() {
-        return attributeLength;
-    }
-
-    public void setAttributeLength(U4 attributeLength) {
-        this.attributeLength = attributeLength;
+    @Override
+    public AttributeType getType() {
+        return AttributeType.ConstantValue;
     }
 
     public U2 getConstantValueIndex() {
@@ -50,17 +41,16 @@ public class ConstantValueAttribute {
 
     @Override
     public String toString() {
-        return "ConstantValueAttribute{" +
-                "attributeNameIndex=" + attributeNameIndex.toInteger() +
-                ", attributeLength=" + attributeLength.toInteger() +
+        return "ConstantValueAttribute{"
+                + super.toString() +
                 ", constantValueIndex=" + constantValueIndex.toInteger() +
                 '}';
     }
 
     public String detail(ClassFile classFile) {
-        return "ConstantValueAttribute{" +
-                "attributeNameIndex=" + ConstantPoolUtil.getByIndex(classFile, attributeLength.toInteger() - 1) +
-                ", attributeLength=" + attributeLength.toInteger() +
+
+        return "ConstantValueAttribute{"
+                + super.detail(classFile) +
                 ", constantValueIndex=" + ConstantPoolUtil.getByIndex(classFile, constantValueIndex.toInteger() - 1) +
                 '}';
     }

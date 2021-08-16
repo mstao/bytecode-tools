@@ -42,6 +42,7 @@ public class ClassFileAnalysis {
 
         System.out.println();
         System.err.println("字节码文件解析完成");
+        System.out.println();
 
         return classFile;
     }
