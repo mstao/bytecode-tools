@@ -67,12 +67,19 @@ public class MethodInfo {
     }
 
     public String detail(ClassFile classFile) {
+        StringBuilder attributeBuild = new StringBuilder();
+        if (attributes != null && attributes.length > 0) {
+            for (AttributeInfo attributeInfo : attributes) {
+                attributeBuild.append(attributeInfo.detail(classFile));
+            }
+        }
+
         return "MethodInfo{" +
-                "accessFlags= [" + AccessFlagsUtil.parseFieldAccessFlag(accessFlags.toInteger()) + "] " +
+                "accessFlags= [" + AccessFlagsUtil.parseMethodAccessFlag(accessFlags.toInteger()) + "] " +
                 ", nameIndex=" + ConstantPoolUtil.getByIndex(classFile, nameIndex.toInteger() - 1) +
                 ", descriptorIndex=" + ConstantPoolUtil.getByIndex(classFile, descriptorIndex.toInteger() - 1) +
                 ", attributesCount=" + attributesCount.toInteger() +
-                ", attributes=" + Arrays.toString(attributes) +
+                ", attributes=" + attributeBuild.toString() +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package me.mingshan.bytecode.handler;
 
+import me.mingshan.bytecode.handler.attribute.AttributeProcessingFactory;
 import me.mingshan.bytecode.type.AttributeInfo;
 import me.mingshan.bytecode.type.ClassFile;
 import me.mingshan.bytecode.type.U2;
@@ -29,6 +30,16 @@ public class AttributeHandler implements BaseHandler {
 
         AttributeInfo[] attributeInfos = AttributeUtil.parseAttributeInfos(codeBuffer, attributesCountInt);
         classFile.setAttributes(attributeInfos);
+
+        if (attributesCountInt > 0) {
+            for (AttributeInfo attributeInfo : attributeInfos) {
+                System.out.println("-----");
+                System.out.println("原始信息：" + attributeInfo);
+                System.out.println("详细信息：" + attributeInfo.detail(classFile));
+
+                AttributeProcessingFactory.processConstantValueAttribute(classFile, attributeInfo);
+            }
+        }
 
         System.out.println("<<<<<<< 属性解析结束 <<<<<<<");
         System.out.println();

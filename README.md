@@ -1,13 +1,14 @@
 # bytecode-tools
-Learn and parse java byte code.
+解析字节码工具
 
-阅读[《Java虚拟机字节码：从入门到实战》](https://weread.qq.com/web/reader/8d7327107217731e8d7ed1e)
+本工具在学习[《Java虚拟机字节码：从入门到实战》](https://weread.qq.com/web/reader/8d7327107217731e8d7ed1e)基础上优化而来的。
+将字节码还原为Java中的对象，让对Java字节码感兴趣的同学更直观了解字节码的结构，对深入了解字节码和ASM等框架有着很大的帮助。
 
-# Java虚拟机规范
+# 整体架构
 
-- [Java 规范列表](https://docs.oracle.com/javase/specs/index.html)
-- [Java8 虚拟机规范](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)
-- [字节码文件格式](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.1)
+- type： 包含字节码的各种数据结构，例如CpInfo等
+- handler：每种结构的解析器，参考JVM规范实现
+- main：项目启动入口，协调各种解析器，实现字节码解析
 
 # 字节码文件格式
 
@@ -34,8 +35,14 @@ ClassFile {
 
 其中 u2, u4 分别表示2字节和4字节。
 
-
 # 文档列表
 
 - [魔数和版本号](src/main/java/me/mingshan/bytecode/handler/doc/MagicAndVersion.md)
 - [常量池](src/main/java/me/mingshan/bytecode/handler/ConstantPool.md)
+- [字段](src/main/java/me/mingshan/bytecode/handler/doc/Field.md)
+
+# Java虚拟机规范
+
+- [Java 规范列表](https://docs.oracle.com/javase/specs/index.html)
+- [Java8 虚拟机规范](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)
+- [字节码文件格式](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.1)

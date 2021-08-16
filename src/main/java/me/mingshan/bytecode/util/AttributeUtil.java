@@ -18,11 +18,14 @@ public class AttributeUtil {
             AttributeInfo attributeInfo = new AttributeInfo();
             attributeInfo.setAttributeNameIndex(new U2(codeBuffer.get(), codeBuffer.get()));
             attributeInfo.setAttributeLength(new U4(codeBuffer.get(), codeBuffer.get(), codeBuffer.get(), codeBuffer.get()));
+            Integer attributeLength = attributeInfo.getAttributeLength().toInteger();
 
-            // 解析info
-            byte[] info = new byte[attributeInfo.getAttributeLength().toInteger()];
-            codeBuffer.get(info, 0, info.length);
-            attributeInfo.setInfo(info);
+            if (attributeLength > 0) {
+                // 解析info
+                byte[] info = new byte[attributeLength];
+                codeBuffer.get(info, 0, info.length);
+                attributeInfo.setInfo(info);
+            }
             attributeInfos[j] = attributeInfo;
         }
         return attributeInfos;

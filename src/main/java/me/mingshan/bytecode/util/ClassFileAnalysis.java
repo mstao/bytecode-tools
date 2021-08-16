@@ -46,6 +46,11 @@ public class ClassFileAnalysis {
         return classFile;
     }
 
+    /**
+     * 校验缓存区是否还有内容剩余，来判断解析是否完成
+     *
+     * @param codeBuffer 缓冲区
+     */
     private static void verify(ByteBuffer codeBuffer) {
         boolean remaining = codeBuffer.hasRemaining();
         if (remaining) {

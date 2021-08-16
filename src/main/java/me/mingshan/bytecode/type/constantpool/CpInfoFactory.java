@@ -24,8 +24,8 @@ public class CpInfoFactory {
         CP_INFO_MAP.put(CpInfoTagEnum.CONSTANT_MethodHandle.getValue(), CONSTANT_MethodHandle_info.class);
         CP_INFO_MAP.put(CpInfoTagEnum.CONSTANT_MethodType.getValue(), CONSTANT_MethodType_info.class);
         CP_INFO_MAP.put(CpInfoTagEnum.CONSTANT_InvokeDynamic.getValue(), CONSTANT_InvokeDynamic_info.class);
-        CP_INFO_MAP.put(CpInfoTagEnum.CONSTANT_Module.getValue(), CONSTANT_InvokeDynamic_info.class);
-        CP_INFO_MAP.put(CpInfoTagEnum.CONSTANT_Package.getValue(), CONSTANT_InvokeDynamic_info.class);
+        CP_INFO_MAP.put(CpInfoTagEnum.CONSTANT_Module.getValue(), CONSTANT_Module_info.class);
+        CP_INFO_MAP.put(CpInfoTagEnum.CONSTANT_Package.getValue(), CONSTANT_Package_info.class);
     }
 
     public static CpInfo getCpInfo(byte tag) throws NoSuchCpInfoException {

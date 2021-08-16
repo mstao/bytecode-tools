@@ -21,7 +21,7 @@ public class CONSTANT_Integer_info extends CpInfo {
     public String toString() {
         return "CONSTANT_Integer_info{" +
                 "tag=" + super.getTag().getValue() +
-                ", bytes=" + bytes.toHexString() +
+                ", bytes=" + bytes.toInteger() +
                 '}';
     }
 

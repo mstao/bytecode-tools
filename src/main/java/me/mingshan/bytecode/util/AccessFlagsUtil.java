@@ -2,6 +2,7 @@ package me.mingshan.bytecode.util;
 
 import me.mingshan.bytecode.type.AccessFlagEnum;
 import me.mingshan.bytecode.type.FieldAccessFlagEnum;
+import me.mingshan.bytecode.type.MethodAccessFlagEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +97,72 @@ public class AccessFlagsUtil {
         if ((accessFlag & FieldAccessFlagEnum.ACC_ENUM.getAccessFlag()) == FieldAccessFlagEnum.ACC_ENUM.getAccessFlag()) {
             accessFlags.add(FieldAccessFlagEnum.ACC_ENUM.getDesc());
         }
+        StringBuilder sb = new StringBuilder();
+        accessFlags.forEach(s -> sb.append(s).append(","));
+
+        if (sb.length() > 0) {
+            return sb.substring(0, sb.length() - 1);
+        }
+        return sb.toString();
+    }
+
+
+    /**
+     * 解析方法的详细的访问标志
+     *
+     * @param accessFlag 访问标志
+     * @return 访问标志字符串
+     */
+    public static String parseMethodAccessFlag(int accessFlag) {
+        List<String> accessFlags = new ArrayList<>();
+        if ((accessFlag & MethodAccessFlagEnum.ACC_PUBLIC.getAccessFlag()) == MethodAccessFlagEnum.ACC_PUBLIC.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_PUBLIC.getDesc());
+        }
+
+        if ((accessFlag & MethodAccessFlagEnum.ACC_PRIVATE.getAccessFlag()) == MethodAccessFlagEnum.ACC_PRIVATE.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_PRIVATE.getDesc());
+        }
+
+        if ((accessFlag & MethodAccessFlagEnum.ACC_PROTECTED.getAccessFlag()) == MethodAccessFlagEnum.ACC_PROTECTED.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_PROTECTED.getDesc());
+        }
+
+        if ((accessFlag & MethodAccessFlagEnum.ACC_STATIC.getAccessFlag()) == MethodAccessFlagEnum.ACC_STATIC.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_STATIC.getDesc());
+        }
+
+        if ((accessFlag & MethodAccessFlagEnum.ACC_FINAL.getAccessFlag()) == MethodAccessFlagEnum.ACC_FINAL.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_FINAL.getDesc());
+        }
+
+        if ((accessFlag & MethodAccessFlagEnum.ACC_SYNCHRONIZED.getAccessFlag()) == MethodAccessFlagEnum.ACC_SYNCHRONIZED.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_SYNCHRONIZED.getDesc());
+        }
+
+        if ((accessFlag & MethodAccessFlagEnum.ACC_BRIDGE.getAccessFlag()) == MethodAccessFlagEnum.ACC_BRIDGE.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_BRIDGE.getDesc());
+        }
+
+        if ((accessFlag & MethodAccessFlagEnum.ACC_VARARGS.getAccessFlag()) == MethodAccessFlagEnum.ACC_VARARGS.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_VARARGS.getDesc());
+        }
+
+        if ((accessFlag & MethodAccessFlagEnum.ACC_NATIVE.getAccessFlag()) == MethodAccessFlagEnum.ACC_NATIVE.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_NATIVE.getDesc());
+        }
+
+        if ((accessFlag & MethodAccessFlagEnum.ACC_ABSTRACT.getAccessFlag()) == MethodAccessFlagEnum.ACC_ABSTRACT.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_ABSTRACT.getDesc());
+        }
+
+        if ((accessFlag & MethodAccessFlagEnum.ACC_STRICT.getAccessFlag()) == MethodAccessFlagEnum.ACC_STRICT.getAccessFlag()) {
+            accessFlags.add(MethodAccessFlagEnum.ACC_STRICT.getDesc());
+        }
+
+        if ((accessFlag & FieldAccessFlagEnum.ACC_SYNTHETIC.getAccessFlag()) == FieldAccessFlagEnum.ACC_SYNTHETIC.getAccessFlag()) {
+            accessFlags.add(FieldAccessFlagEnum.ACC_SYNTHETIC.getDesc());
+        }
+
         StringBuilder sb = new StringBuilder();
         accessFlags.forEach(s -> sb.append(s).append(","));
 

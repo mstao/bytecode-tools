@@ -1,11 +1,14 @@
 package me.mingshan.bytecode.type;
 
+import me.mingshan.bytecode.util.ConstantPoolUtil;
+
 import java.util.Arrays;
 
 /**
  * 属性明细
  */
 public class AttributeInfo {
+    //  The constant_pool entry at attribute_name_index must be a CONSTANT_Utf8_info structure representing the name of the attribute.
     private U2 attributeNameIndex;
     private U4 attributeLength;
     private byte[] info;
@@ -38,6 +41,14 @@ public class AttributeInfo {
     public String toString() {
         return "AttributeInfo{" +
                 "attributeNameIndex=" + attributeNameIndex.toInteger() +
+                ", attributeLength=" + attributeLength.toInteger() +
+                ", info=" + Arrays.toString(info) +
+                '}';
+    }
+
+    public String detail(ClassFile classFile) {
+        return "AttributeInfo{" +
+                "attributeNameIndex=" + ConstantPoolUtil.getByIndex(classFile,attributeNameIndex.toInteger() - 1) +
                 ", attributeLength=" + attributeLength.toInteger() +
                 ", info=" + Arrays.toString(info) +
                 '}';

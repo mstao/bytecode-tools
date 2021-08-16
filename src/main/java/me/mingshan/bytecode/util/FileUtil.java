@@ -16,16 +16,22 @@ public class FileUtil {
             throw new Exception("file not exists!");
         }
 
-        byte[] byteCodeBuf = new byte[4096];
-        int length;
-        try (InputStream in = new FileInputStream(file)) {
-            length = in.read(byteCodeBuf);
-        }
+        if (file.length() <= Integer.MAX_VALUE) {
+            byte[] byteCodeBuf = new byte[Math.toIntExact(file.length())];
+            int length;
+            try (InputStream in = new FileInputStream(file)) {
+                length = in.read(byteCodeBuf);
+            }
 
-        if (length < 1) {
-            throw new Exception("dididi");
-        }
+            System.out.println("文件字节数：" + file.length());
 
-        return ByteBuffer.wrap(byteCodeBuf, 0, length).asReadOnlyBuffer();
+            if (length < 1) {
+                throw new Exception("dididi");
+            }
+
+            return ByteBuffer.wrap(byteCodeBuf, 0, length).asReadOnlyBuffer();
+        } else {
+            throw new RuntimeException("暂不支持读取大文件");
+        }
     }
 }

@@ -24,11 +24,7 @@ public class CONSTANT_Utf8_info extends CpInfo {
         Integer intLength = length.toInteger();
         bytes = new byte[intLength];
 
-//        codeBuffer.get(bytes, 0, intLength);
-
-        for (int i = 0; i < intLength; i++) {
-            bytes[i] = codeBuffer.get();
-        }
+        codeBuffer.get(bytes, 0, intLength);
     }
 
     public U2 getLength() {
