@@ -1,5 +1,6 @@
 package me.mingshan.bytecode.util;
 
+import lombok.extern.slf4j.Slf4j;
 import me.mingshan.bytecode.handler.*;
 import me.mingshan.bytecode.type.ClassFile;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+@Slf4j
 public class ClassFileAnalysis {
     private static final List<BaseHandler> BYTE_CODE_HANDLERS = new ArrayList<>();
 
@@ -25,7 +27,7 @@ public class ClassFileAnalysis {
     }
 
     public static ClassFile analysis(ByteBuffer codeBuffer) {
-        System.err.println("字节码文件解析开始");
+        log.info("字节码文件解析开始");
         System.out.println();
 
         codeBuffer.position(0);
@@ -41,7 +43,7 @@ public class ClassFileAnalysis {
         verify(codeBuffer);
 
         System.out.println();
-        System.err.println("字节码文件解析完成");
+        log.info("字节码文件解析完成");
         System.out.println();
 
         return classFile;

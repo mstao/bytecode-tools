@@ -17,9 +17,9 @@ public class CodeAttribute extends BaseAttribute {
     private U4 codeLength;
     private U1[] code;
     private U2 exceptionTableLength;
-    private ExceptionTable[] exception_table;
+    private ExceptionTable[] exceptionTable;
     private U2 attributesCount;
-    private AttributeInfo attributes;
+    private AttributeInfo[] attributes;
 
     public CodeAttribute(U2 attributeNameIndex, U4 attributeLength) {
         super(attributeNameIndex, attributeLength);
@@ -70,12 +70,12 @@ public class CodeAttribute extends BaseAttribute {
         this.exceptionTableLength = exceptionTableLength;
     }
 
-    public ExceptionTable[] getException_table() {
-        return exception_table;
+    public ExceptionTable[] getExceptionTable() {
+        return exceptionTable;
     }
 
-    public void setException_table(ExceptionTable[] exception_table) {
-        this.exception_table = exception_table;
+    public void setExceptionTable(ExceptionTable[] exceptionTable) {
+        this.exceptionTable = exceptionTable;
     }
 
     public U2 getAttributesCount() {
@@ -86,25 +86,25 @@ public class CodeAttribute extends BaseAttribute {
         this.attributesCount = attributesCount;
     }
 
-    public AttributeInfo getAttributes() {
+    public AttributeInfo[] getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(AttributeInfo attributes) {
+    public void setAttributes(AttributeInfo[] attributes) {
         this.attributes = attributes;
     }
 
     @Override
     public String toString() {
         return "CodeAttribute{" +
-                "maxStack=" + maxStack +
-                ", maxLocals=" + maxLocals +
-                ", codeLength=" + codeLength +
+                "maxStack=" + maxStack.toInteger() +
+                ", maxLocals=" + maxLocals.toInteger() +
+                ", codeLength=" + codeLength.toInteger() +
                 ", code=" + Arrays.toString(code) +
                 ", exceptionTableLength=" + exceptionTableLength +
-                ", exception_table=" + Arrays.toString(exception_table) +
+                ", exception_table=" + Arrays.toString(exceptionTable) +
                 ", attributesCount=" + attributesCount +
-                ", attributes=" + attributes +
+                ", attributes=" + Arrays.toString(attributes) +
                 '}';
     }
 }

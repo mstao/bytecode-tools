@@ -35,10 +35,12 @@ public class AttributeTest {
 
             for (AttributeInfo attributeInfo : attributes) {
                 BaseAttribute baseAttribute = ParseAttributeFactory.parseAttribute(classFile, attributeInfo);
-                System.out.println("基础信息：" + baseAttribute);
-                System.out.println("详细信息：" + baseAttribute.detail(classFile));
-                System.out.println("---- ");
-                System.out.println();
+                if (baseAttribute != null) {
+                    System.out.println("基础信息：" + baseAttribute);
+                    System.out.println("详细信息：" + baseAttribute.detail(classFile));
+                    System.out.println("---- ");
+                    System.out.println();
+                }
             }
         }
     }

@@ -37,6 +37,11 @@ public class ParseAttributeFactory {
             return constantValueAttributeHandler.processAttribute(classFile, attributeInfo);
         }
 
+        if (AttributeType.Code.equals(attributeHandler.getType())) {
+            CodeAttributeHandler codeAttributeHandler = (CodeAttributeHandler) attributeHandler;
+            return codeAttributeHandler.processAttribute(classFile, attributeInfo);
+        }
+
         return null;
     }
 
