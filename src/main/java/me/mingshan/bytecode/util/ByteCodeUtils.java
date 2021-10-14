@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class ByteCodeUtils {
     public static void saveFile(byte[] bytes, String className) throws IOException {
-        File file = new File( className + ".class");
+        File file = new File( "src\\main\\java\\me\\mingshan\\bytecode\\asm\\" + className + ".class");
 
         boolean newFile = file.createNewFile();
 
