@@ -1,7 +1,7 @@
 # bytecode-tools
 解析字节码工具
 
-本工具在学习[《Java虚拟机字节码：从入门到实战》](https://github.com/wujiuye/JVMByteCodeGitBook)基础上优化而来的。
+本工具在学习[《深入浅出JVM字节码》](http://jvmbytecode.wujiuye.cn/)基础上优化而来的。
 将字节码还原为Java中的对象，让对Java字节码感兴趣的同学更直观了解字节码的结构，对深入了解字节码和ASM等框架有着很大的帮助。
 
 # 整体架构
