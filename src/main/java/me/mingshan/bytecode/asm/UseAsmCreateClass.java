@@ -102,8 +102,8 @@ public class UseAsmCreateClass {
      */
     private static void generateField(ClassWriter classWriter, String className) {
         // 添加静态属性
-        classWriter.visitField(ACC_PRIVATE | ACC_STATIC | ACC_FINAL, "ZZZ", "I", null, 100);
-
+        classWriter.visitField(ACC_PUBLIC | ACC_STATIC | ACC_FINAL, "ZZZ", "I", null, 100)
+        .visitEnd();
 
         classWriter.visitField(ACC_PRIVATE, "name", "Ljava/lang/String;", null, "")
         .visitEnd();
