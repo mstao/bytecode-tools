@@ -122,7 +122,7 @@ public class AsmGenerateClass {
             getVisitor.visitVarInsn(ALOAD, 0);
             getVisitor.visitFieldInsn(GETFIELD, className, fieldName, typeOf);
             getVisitor.visitInsn(fetchLoadAndReturn(typeOf)[1]);
-            getVisitor.visitMaxs(1, 1);
+            getVisitor.visitMaxs(2, 1);
             getVisitor.visitEnd();
 
             // setMethod

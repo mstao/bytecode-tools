@@ -1,6 +1,7 @@
 package me.mingshan.bytecode.attribute;
 
 import me.mingshan.bytecode.asm.AsmGenerateClass;
+import me.mingshan.bytecode.asm.AsmModifyClass;
 import me.mingshan.bytecode.asm.EntityInfo;
 import me.mingshan.bytecode.classloader.MyClassLoader;
 import me.mingshan.bytecode.util.ByteCodeUtils;
@@ -70,5 +71,20 @@ public class AsmTest {
         Method getNameMethod = clazz.getMethod("getName");
         Object result = getNameMethod.invoke(o);
         System.out.println(result);
+    }
+
+    @Test
+    public void test3() throws IOException {
+        AsmModifyClass.addField("me.mingshan.bytecode.asm.Demo");
+    }
+
+    @Test
+    public void test4() throws IOException {
+        AsmModifyClass.removeMethod("me.mingshan.bytecode.asm.Demo");
+    }
+
+    @Test
+    public void test5() throws IOException {
+        AsmModifyClass.modifyMethod("me.mingshan.bytecode.asm.Demo");
     }
 }
