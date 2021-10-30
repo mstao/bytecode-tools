@@ -45,4 +45,13 @@ public class Utils {
         byteSrc[0] = (byte) ((value & 0x000000FF));
         return byteSrc;
     }
+
+    public static String toFirstUpperCase(String source) {
+        char[] chars = source.toCharArray();
+        if (chars[0] >= 'a' && chars[0] <= 'z') {
+            chars[0] = (char) (chars[0] - 32);
+        }
+
+        return new String(chars);
+    }
 }

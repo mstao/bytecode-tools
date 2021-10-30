@@ -2,9 +2,11 @@ package me.mingshan.bytecode.asm;
 
 
 import me.mingshan.bytecode.util.ByteCodeUtils;
+import me.mingshan.bytecode.util.Utils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 import java.io.IOException;
 
@@ -49,16 +51,18 @@ import static org.objectweb.asm.Opcodes.*;
  * value：字段的初始值，此参数只用于静态字段，如接口中声明的字段或类中声明的静态常量字段，并且类型必须是基本数据类型或String类型。
  */
 public class UseAsmCreateClass {
-    public static void main(String[] args) throws IOException {
+
+
+    public static void generate() throws IOException {
         String className = "me.mingshan.bytecode.asm.Demo";
-        String signature = "L" + className.replace(".", "/") + ";";
+        //String signature = "L" + className.replace(".", "/") + ";";
 
         ClassWriter classWriter = new ClassWriter(0);
 
         classWriter.visit(Opcodes.V1_8, // version
                 ACC_PUBLIC, // access
                 className.replace(".", "/"), // name
-                signature,
+                null,
                 Object.class.getName().replace(".", "/"), // super class
                 null // interface
         );
@@ -105,18 +109,15 @@ public class UseAsmCreateClass {
         classWriter.visitField(ACC_PUBLIC | ACC_STATIC | ACC_FINAL, "ZZZ", "I", null, 100)
         .visitEnd();
 
-        classWriter.visitField(ACC_PRIVATE, "name", "Ljava/lang/String;", null, "")
-        .visitEnd();
+        String typeOf = Type.getType(String.class).getDescriptor();
+        classWriter.visitField(ACC_PRIVATE, "name", typeOf, null, 0).visitEnd();
 
         generateGetSetMethod(classWriter, "name", className);
     }
 
-    /**
-     * @param classWriter
-     * @param fileName
-     * @param className
-     */
-    private static void generateGetSetMethod(ClassWriter classWriter, String fileName, String className) {
+    private static void generateGetSetMethod(ClassWriter classWriter, String fieldName, String className) {
+        // 当要操作当前类的变量或方法时，需要先 aload_0, 然后再做相关操作！
+
 
         /*
          * aload_0
@@ -124,17 +125,13 @@ public class UseAsmCreateClass {
          * areturn
          */
 
-        MethodVisitor getMethodVisitor = classWriter.visitMethod(ACC_PUBLIC, "get" + toFirst(fileName),
-                "()Ljava/lang/String;", null, null);
+        String getMethodName = "get" + Utils.toFirstUpperCase(fieldName);
+        MethodVisitor getMethodVisitor = classWriter.visitMethod(ACC_PUBLIC, getMethodName, "()Ljava/lang/String;", null, null);
         getMethodVisitor.visitCode();
-
         getMethodVisitor.visitVarInsn(ALOAD, 0);
-        getMethodVisitor.visitFieldInsn(GETFIELD, className, fileName, "Ljava/lang/String;");
-
-        // 添加一条返回指令
+        getMethodVisitor.visitFieldInsn(GETFIELD, className, fieldName, "Ljava/lang/String;");
         getMethodVisitor.visitInsn(ARETURN);
-        // 设置操作数栈和局部变量表大小
-        getMethodVisitor.visitMaxs(1, 1);
+        getMethodVisitor.visitMaxs(2, 1);
         getMethodVisitor.visitEnd();
 
         /*
@@ -143,28 +140,19 @@ public class UseAsmCreateClass {
          * putfield
          * return
          */
-
-        MethodVisitor setMethodVisitor = classWriter.visitMethod(ACC_PUBLIC, "set" + toFirst(fileName),
-                "(Ljava/lang/String;)V", null, null);
-        setMethodVisitor.visitCode();
-
-        setMethodVisitor.visitVarInsn(ALOAD, 0);
-        setMethodVisitor.visitVarInsn(ALOAD, 1);
-        setMethodVisitor.visitFieldInsn(PUTFIELD, className, fileName, "Ljava/lang/String;");
-
-        // 添加一条返回指令
-        setMethodVisitor.visitInsn(RETURN);
-        // 设置操作数栈和局部变量表大小
-        setMethodVisitor.visitMaxs(2, 2);
-        setMethodVisitor.visitEnd();
-    }
-
-    private static String toFirst(String source) {
-        char[] chars = source.toCharArray();
-        if (chars[0] >= 'a' && chars[0] <= 'z') {
-            chars[0] = (char) (chars[0] - 32);
-        }
-
-        return new String(chars);
+//
+//        MethodVisitor setMethodVisitor = classWriter.visitMethod(ACC_PUBLIC, "set" + toFirst(fileName),
+//                "(Ljava/lang/String;)V", null, null);
+//        setMethodVisitor.visitCode();
+//
+//        setMethodVisitor.visitVarInsn(ALOAD, 0);
+//        setMethodVisitor.visitVarInsn(ALOAD, 1);
+//        setMethodVisitor.visitFieldInsn(PUTFIELD, className, fileName, "Ljava/lang/String;");
+//
+//        // 添加一条返回指令
+//        setMethodVisitor.visitInsn(RETURN);
+//        // 设置操作数栈和局部变量表大小
+//        setMethodVisitor.visitMaxs(2, 2);
+//        setMethodVisitor.visitEnd();
     }
 }

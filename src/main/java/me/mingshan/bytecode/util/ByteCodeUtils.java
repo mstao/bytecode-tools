@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import static me.mingshan.bytecode.Main.ASM_PATH;
+
 public class ByteCodeUtils {
     public static void saveFile(byte[] bytes, String className) throws IOException {
-        File file = new File( "E:\\D\\develop\\MY\\CODE\\bytecode-tools\\src\\main\\java\\me\\mingshan\\bytecode\\asm\\" + className + ".class");
+        File file = new File( ASM_PATH + className + ".class");
 
         boolean newFile = file.createNewFile();
 

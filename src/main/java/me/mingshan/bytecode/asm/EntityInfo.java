@@ -6,7 +6,7 @@ import java.util.List;
  * @author hanjuntao
  * @date 2021/10/29
  */
-public class BeanEnityInfo {
+public class EntityInfo {
     private String className;
     private List<FieldInfo> fields;
 
