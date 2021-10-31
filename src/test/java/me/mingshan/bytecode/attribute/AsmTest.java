@@ -1,5 +1,6 @@
 package me.mingshan.bytecode.attribute;
 
+import me.mingshan.bytecode.asm.AsmExtendClass;
 import me.mingshan.bytecode.asm.AsmGenerateClass;
 import me.mingshan.bytecode.asm.AsmModifyClass;
 import me.mingshan.bytecode.asm.EntityInfo;
@@ -86,5 +87,10 @@ public class AsmTest {
     @Test
     public void test5() throws IOException {
         AsmModifyClass.modifyMethod("me.mingshan.bytecode.asm.Demo");
+    }
+
+    @Test
+    public void test6() throws IOException {
+        AsmExtendClass.generate();
     }
 }
