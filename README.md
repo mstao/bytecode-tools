@@ -46,3 +46,7 @@ ClassFile {
 - [Java 规范列表](https://docs.oracle.com/javase/specs/index.html)
 - [Java8 虚拟机规范](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)
 - [字节码文件格式](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.1)
+
+# 参考
+
+- https://blog.csdn.net/weixin_45292397/article/details/103328057
