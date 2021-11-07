@@ -76,12 +76,12 @@ public class AsmGenerateClass {
          * 第六个参数是String[]类型的， 传入当前要生成的类的直接实现的接口。
          */
         String className = entity.getClassName().replace(".", "/");
-        String signature = "L" + className + ";";
+        String signature = "<T:Ljava/lang/Object;>Ljava/lang/Object;";
 
         cw.visit(Opcodes.V1_8, // version
                 ACC_PUBLIC, // access
                 className, // name 全限定名
-                "<T:Ljava/lang/Object;>Ljava/lang/Object;", // 签名
+                signature, // 签名
                 Object.class.getName().replace(".", "/"), // super class
                 null // interface
         );
@@ -112,26 +112,27 @@ public class AsmGenerateClass {
             String fieldName = f.getName();
 
             // Ljava.lang.String;
-            String typeOf = Type.getType(f.getClassType()).getDescriptor();
+            String descriptor = Type.getType(f.getClassType()).getDescriptor();
+
+            cw.visitField(ACC_PRIVATE, fieldName, descriptor, null, 0).visitEnd();
 
             // getMethod
-            cw.visitField(ACC_PRIVATE, fieldName, typeOf, null, 0).visitEnd();
             String getMethodName = "get" + Utils.toFirstUpperCase(fieldName);
-            MethodVisitor getVisitor = cw.visitMethod(ACC_PUBLIC, getMethodName, "()" + typeOf, null, null);
+            MethodVisitor getVisitor = cw.visitMethod(ACC_PUBLIC, getMethodName, "()" + descriptor, null, null);
             getVisitor.visitCode();
             getVisitor.visitVarInsn(ALOAD, 0);
-            getVisitor.visitFieldInsn(GETFIELD, className, fieldName, typeOf);
-            getVisitor.visitInsn(fetchLoadAndReturn(typeOf)[1]);
+            getVisitor.visitFieldInsn(GETFIELD, className, fieldName, descriptor);
+            getVisitor.visitInsn(fetchLoadAndReturn(descriptor)[1]);
             getVisitor.visitMaxs(2, 1);
             getVisitor.visitEnd();
 
             // setMethod
             String setMethodName = "set" + Utils.toFirstUpperCase(fieldName);
-            MethodVisitor setVisitor = cw.visitMethod(ACC_PUBLIC, setMethodName, "(" + typeOf + ")V", null, null);
+            MethodVisitor setVisitor = cw.visitMethod(ACC_PUBLIC, setMethodName, "(" + descriptor + ")V", null, null);
             setVisitor.visitCode();
             setVisitor.visitVarInsn(ALOAD, 0);
-            setVisitor.visitVarInsn(fetchLoadAndReturn(typeOf)[0], 1);
-            setVisitor.visitFieldInsn(PUTFIELD, className, fieldName, typeOf);
+            setVisitor.visitVarInsn(fetchLoadAndReturn(descriptor)[0], 1);
+            setVisitor.visitFieldInsn(PUTFIELD, className, fieldName, descriptor);
             setVisitor.visitInsn(RETURN);
             setVisitor.visitMaxs(2, 2);
             setVisitor.visitEnd();

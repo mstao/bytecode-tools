@@ -17,10 +17,11 @@ public class ModifyMethodClassWriter extends ClassVisitor {
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-        // 如果是setName，那么当前的MethodVisitor直接置空
+        // 如果是getName，那么当前的MethodVisitor直接置空
         if (name.equals("getName")) {
             MethodVisitor methodVisitor = super.visitMethod(access, name, descriptor, signature, exceptions);
-            return new ModifyMethodWriter(methodVisitor);
+            // 返回自己改写过的MethodVisitor
+            //            return new ModifyMethodWriter(methodVisitor);
         }
         return super.visitMethod(access, name, descriptor, signature, exceptions);
     }

@@ -33,4 +33,14 @@ public class ModifyMethodWriter extends MethodVisitor {
                 "(Ljava/lang/String;)V", false);
         methodVisitor.visitMaxs(2, 1);
     }
+
+    @Override
+    public void visitInsn(int opcode) {
+        // 如果想在return之前添加一条指令，那么就拦截
+        if (opcode == Opcodes.RETURN) {
+            // todo 添加自己的指令
+        }
+
+        super.visitInsn(opcode);
+    }
 }

@@ -32,19 +32,21 @@ public class ClassFileAnalysis {
 
         codeBuffer.position(0);
 
+        // 新建一个ClassFile，里面的内容需要各个解释器来填充
         ClassFile classFile = new ClassFile();
 
+        // 严格按照JVM规范定义的顺序来排序
         BYTE_CODE_HANDLERS.sort(Comparator.comparingInt(BaseHandler::order));
 
+        // 按照顺序进行解析
         for (BaseHandler baseHandler : BYTE_CODE_HANDLERS) {
             baseHandler.read(codeBuffer, classFile);
         }
 
+        // 校验字节码是否解析完成
         verify(codeBuffer);
 
-        System.out.println();
         log.info("字节码文件解析完成");
-        System.out.println();
 
         return classFile;
     }

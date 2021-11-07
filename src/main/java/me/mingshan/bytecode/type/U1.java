@@ -12,6 +12,4 @@ public class U1 extends U {
     public Integer toInteger() {
         return value[0] & 0xff;
     }
-
-
 }
