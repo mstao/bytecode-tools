@@ -20,6 +20,7 @@ public class ParseAttributeFactory {
 
     static {
         ATTRIBUTE_HANDLER_MAP.put(AttributeType.ConstantValue.name(), new ConstantValueAttributeHandler());
+        ATTRIBUTE_HANDLER_MAP.put(AttributeType.Code.name(), new CodeAttributeHandler());
     }
 
     public static BaseAttribute parseAttribute(ClassFile classFile, AttributeInfo attributeInfo) {
