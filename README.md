@@ -37,9 +37,9 @@ ClassFile {
 
 # 文档列表
 
-- [魔数和版本号](src/main/java/me/mingshan/bytecode/handler/doc/MagicAndVersion.md)
-- [常量池](src/main/java/me/mingshan/bytecode/handler/ConstantPool.md)
-- [字段](src/main/java/me/mingshan/bytecode/handler/doc/Field.md)
+- [魔数和版本号](src/main/java/me/mingshan/bytecode/parse/handler/doc/MagicAndVersion.md)
+- [常量池](src/main/java/me/mingshan/bytecode/parse/handler/ConstantPool.md)
+- [字段](src/main/java/me/mingshan/bytecode/parse/handler/doc/Field.md)
 
 # Java虚拟机规范
 

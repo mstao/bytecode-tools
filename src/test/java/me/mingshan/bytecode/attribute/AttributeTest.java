@@ -1,13 +1,13 @@
 package me.mingshan.bytecode.attribute;
 
-import me.mingshan.bytecode.handler.attribute.ParseAttributeFactory;
-import me.mingshan.bytecode.type.AttributeInfo;
-import me.mingshan.bytecode.type.ClassFile;
-import me.mingshan.bytecode.type.FieldInfo;
-import me.mingshan.bytecode.type.MethodInfo;
-import me.mingshan.bytecode.type.attribute.BaseAttribute;
-import me.mingshan.bytecode.util.ClassFileAnalysis;
-import me.mingshan.bytecode.util.FileUtil;
+import me.mingshan.bytecode.parse.handler.attribute.ParseAttributeFactory;
+import me.mingshan.bytecode.parse.type.AttributeInfo;
+import me.mingshan.bytecode.parse.type.ClassFile;
+import me.mingshan.bytecode.parse.type.FieldInfo;
+import me.mingshan.bytecode.parse.type.MethodInfo;
+import me.mingshan.bytecode.parse.type.attribute.BaseAttribute;
+import me.mingshan.bytecode.parse.util.ClassFileAnalysis;
+import me.mingshan.bytecode.parse.util.FileUtil;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
